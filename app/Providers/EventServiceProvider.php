@@ -19,11 +19,14 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EmailNotifier',
             'App\Listeners\ReportListener',
         ],
+        'App\Classes\OTPWasCreated' => [
+            'App\Listeners\EmailNotifier',
+        ]
     ];
 
     public function register()
     {
-        Event::listen("Acme\Jobs\*", function () {
+        Event::listen("App\Classes\*", function () {
             var_dump("listening...");
         });
     }

@@ -6,9 +6,9 @@
  * Time: 12:09
  */
 
-namespace Acme\Commanding;
+namespace App\Classes\Commanding;
 
-use Acme\Commanding\CommandTranslator;
+use App\Classes\Commanding\CommandTranslator;
 use Illuminate\Contracts\Foundation\Application;
 
 class DefaultCommandBus implements CommandBus

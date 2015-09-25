@@ -6,7 +6,7 @@
  * Time: 13:27
  */
 
-namespace Acme\Eventing;
+namespace App\Classes\Eventing;
 
 use Event;
 use App\Podcast;

@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 
-namespace Acme\Commanding;
+namespace App\Classes\Commanding;
 
 use Exception;
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Acme\Commanding\ValidationCommandBus;
+use App\Classes\Commanding\ValidationCommandBus;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Parse\ParseClient;
 
 class Controller extends BaseController
 {
@@ -16,5 +17,9 @@ class Controller extends BaseController
     {
         $this->commandBus = $commandBus;
         $this->request = $request;
+        ParseClient::initialize(
+            'U6CaTTyJ2AGXWLdF3bfl89eWYR2BbMWrEE73Ynsd',
+            'sz7rz1fuCIo4wRjNlM2lVrfuInsHbCRjr270tK8E',
+            'vfUXDTVhAxvjteuuNq2in1fYrG7KKtdSMvchj1Qg');
     }
 }

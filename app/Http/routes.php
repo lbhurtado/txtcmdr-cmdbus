@@ -10,13 +10,19 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-use Illuminate\Support\Facades\Event;
-//use Symfony\Component\HttpKernel\EventListener as Event;
 
 $app->get('/', function () use ($app) {
     return $app->welcome();
 });
 
-$app->post('jobs', 'JobsController@store');
+$app->post('jobs', 'TelerivetController@store');
 
-$app->post('delete/{jobId}', 'JobsController@delete');
+$app->post('delete/{jobId}', 'TelerivetController@delete');
+
+
+
+
+
+$app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], function ($app) {
+    $app->post('sendpin', 'TelerivetController@sendpin');
+});

@@ -5,7 +5,7 @@
  * Date: 9/24/15
  * Time: 17:08
  */
-namespace Acme\Commanding;
+namespace App\Classes\Commanding;
 
 interface CommandBus
 {

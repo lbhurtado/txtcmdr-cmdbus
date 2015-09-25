@@ -6,7 +6,7 @@
  * Time: 13:09
  */
 
-namespace Acme\Eventing;
+namespace App\Classes\Eventing;
 
 
 trait EventGenerator

@@ -9,7 +9,7 @@
 namespace Acme\Jobs;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Acme\Eventing\EventGenerator;
+use App\Classes\Eventing\EventGenerator;
 
 class Job extends Eloquent
 {

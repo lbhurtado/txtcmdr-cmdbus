@@ -6,9 +6,9 @@
  * Time: 17:04
  */
 
-namespace Acme\Commanding;
+namespace App\Classes\Commanding;
 
-use Acme\Commanding\CommandTranslator;
+use App\Classes\Commanding\CommandTranslator;
 use Illuminate\Contracts\Foundation\Application;
 
 class ValidationCommandBus implements CommandBus
