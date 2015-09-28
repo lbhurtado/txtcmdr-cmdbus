@@ -12,7 +12,8 @@ use App\Commands\PostSurveyCommand;
 
 class Ask4QuestionsController extends Controller
 {
-    public function store($code) {
+    public function store($code)
+    {
         $request = $this->request->all();
         $description = $request['description'];
         unset($request['description']);

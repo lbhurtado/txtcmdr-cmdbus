@@ -11,6 +11,7 @@ namespace App\Listeners;
 use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
+use App\Events\SurveyWasPosted;
 
 class Logger extends Listener
 {
@@ -25,5 +26,9 @@ class Logger extends Listener
 
     public function whenLoadWasPosted(LoadWasPosted $event) {
         \Log::info("Load was credited to {$event->load->mobile}.");
+    }
+
+    public function whenSurveyWasPosted(SurveyWasPosted $event) {
+        \Log::info("Survey was posted: {$event->survey->code}.");
     }
 }

@@ -8,8 +8,8 @@
 
 namespace App\Events;
 
-use App\Classes\OTP;
 use Illuminate\Queue\SerializesModels;
+use App\Classes\OTP;
 
 class OTPWasGenerated extends Event
 {

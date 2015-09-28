@@ -4,13 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Events\OTPWasGenerated;
-use App\Events\PINWasConfirmed;
-use App\Events\LoadWasPosted;
+
 use App\Listeners\SMSNotifier;
 use App\Listeners\Logger;
 use App\Listeners\VarDump;
 use App\Listeners\CreditLoad;
+
+use App\Events\OTPWasGenerated;
+use App\Events\PINWasConfirmed;
+use App\Events\LoadWasPosted;
+use App\Events\SurveyWasPosted;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,10 @@ class EventServiceProvider extends ServiceProvider
             Logger::class,
             VarDump::class,
             //CreditLoad::class,
+        ],
+        SurveyWasPosted::class => [
+            Logger::class,
+            VarDump::class,
         ]
     ];
 

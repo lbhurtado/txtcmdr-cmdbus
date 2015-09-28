@@ -11,6 +11,7 @@ namespace App\Listeners;
 use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
+use App\Events\SurveyWasPosted;
 
 class VarDump extends Listener
 {
@@ -28,4 +29,11 @@ class VarDump extends Listener
     {
         var_dump($event);
     }
+
+    public function whenSurveyWasPosted(SurveyWasPosted $event)
+    {
+        var_dump($event);
+    }
+
+    //always add use when{CLASS} up there
 }

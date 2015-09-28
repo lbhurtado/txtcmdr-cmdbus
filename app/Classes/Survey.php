@@ -8,6 +8,7 @@
 
 namespace App\Classes;
 
+use App\Events\SurveyWasPosted;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Classes\Eventing\EventGenerator;
 
@@ -19,10 +20,10 @@ class Survey extends Eloquent
 
     public static function post($code, $description, $data) //add code or description
     {
-        $questions = static::create(compact('code','description','data'));
+        $survey = static::create(compact('code','description','data'));
 
-        //$questions->raise(new JobWasPosted($job));
+        $survey->raise(new SurveyWasPosted($survey));
 
-        return $questions;
+        return $survey;
     }
 }

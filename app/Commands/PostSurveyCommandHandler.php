@@ -8,7 +8,6 @@
 
 namespace App\Commands;
 
-
 use App\Classes\Commanding\CommandHandler;
 use App\Classes\Survey;
 
@@ -16,9 +15,8 @@ class PostSurveyCommandHandler extends CommandHandler
 {
     public function handle($command)
     {
-        $survey = Survey::post($command->code, $command->description, json_encode($command->data));
+        $survey = Survey::post($command->code, $command->description, $command->data);
 
-        //dd($survey->data);
-        $this->dispatcher->dispatch($otp->releaseEvents());
+        $this->dispatcher->dispatch($survey->releaseEvents());
     }
 }
