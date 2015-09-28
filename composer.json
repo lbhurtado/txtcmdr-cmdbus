@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
-        "parse/php-sdk": "1.1.*"
+        "parse/php-sdk": "1.1.*",
+        "telerivet/telerivet-php-client": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -20,7 +21,8 @@
             "Acme\\": "app/Acme"
         },
         "classmap": [
-            "database/"
+            "database/",
+            "vendor/telerivet/telerivet-php-client/telerivet.php"
         ]
     },
     "autoload-dev": {

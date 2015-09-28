@@ -4,6 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\OTPWasGenerated;
+use App\Events\PINWasConfirmed;
+use App\Events\LoadWasPosted;
+use App\Listeners\SMSNotifier;
+use App\Listeners\Logger;
+use App\Listeners\VarDump;
+use App\Listeners\CreditLoad;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,21 +20,28 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Acme\Jobs\*' => [
-   //         'Acme\Jobs\EmailJobPosting',
-   //         'Acme\Jobs\LogJobPosting',
-            'App\Listeners\EmailNotifier',
-            'App\Listeners\ReportListener',
+        OTPWasGenerated::class => [
+            SMSNotifier::class,
+            Logger::class,
+            VarDump::class,
         ],
-        'App\Classes\OTPWasCreated' => [
-            'App\Listeners\EmailNotifier',
+        PINWasConfirmed::class => [
+            SMSNotifier::class,
+            Logger::class,
+            VarDump::class,
+        ],
+        LoadWasPosted::class => [
+            SMSNotifier::class,
+            Logger::class,
+            VarDump::class,
+            //CreditLoad::class,
         ]
     ];
 
     public function register()
     {
-        Event::listen("App\Classes\*", function () {
-            var_dump("listening...");
+        Event::listen("App\Events\*", function () {
+            var_dump($this->listen);
         });
     }
 }

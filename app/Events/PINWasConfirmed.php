@@ -2,29 +2,29 @@
 /**
  * Created by PhpStorm.
  * User: lbhurtado
- * Date: 9/25/15
- * Time: 22:49
+ * Date: 9/27/15
+ * Time: 08:22
  */
 
-namespace App\Classes;
+namespace App\Events;
 
-use App\Classes\OTP;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class OTPWasCreated extends Event
+class PINWasConfirmed extends Event
 {
     use SerializesModels;
 
     public $otp;
 
     /**
-     * OTPWasSent constructor.
-     * @param $otp
+     * UserWasValidated constructor.
+     * @param $pin
      */
-    public function __construct(OTP $otp)
+    public function __construct($otp)
     {
         $this->otp = $otp;
     }
+
 
 }

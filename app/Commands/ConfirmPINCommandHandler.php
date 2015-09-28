@@ -2,21 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: lbhurtado
- * Date: 9/25/15
- * Time: 21:41
+ * Date: 9/27/15
+ * Time: 14:13
  */
 
-namespace App\Classes;
-
+namespace App\Commands;
 
 use App\Classes\Commanding\CommandHandler;
 use App\Classes\OTP;
 
-class SendOTPCommandHandler extends CommandHandler
+class ConfirmPINCommandHandler extends CommandHandler
 {
     public function handle($command)
     {
-        $otp = OTP::create($command->mobile);
+        $otp = OTP::confirm($command->origin, $command->mobile, $command->pin);
         $this->dispatcher->dispatch($otp->releaseEvents());
     }
 }

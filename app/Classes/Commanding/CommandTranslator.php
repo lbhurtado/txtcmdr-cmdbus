@@ -13,7 +13,14 @@ use Exception;
 class CommandTranslator
 {
     public function toCommandHandler($command){
-        $handler = str_replace('Command', 'CommandHandler', get_class($command));
+
+        $reflection_class = new \ReflectionClass($command);
+
+        $namespace = $reflection_class->getNamespaceName();
+
+        $shortname = $reflection_class->getShortName();
+
+        $handler =  $namespace . "\\" . str_replace('Command', 'CommandHandler', $shortname);
 
         if ( ! class_exists($handler)) {
             $message = "Command handler [$handler] does not exist.";

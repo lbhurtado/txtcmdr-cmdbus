@@ -6,19 +6,23 @@
  * Time: 20:45
  */
 
-namespace App\Classes;
+namespace App\Commands;
 
 
-class SendOTPCommand
+class GenerateOTPCommand
 {
+    public $origin;
+
     public $mobile;
 
     /**
      * SendOTPCommand constructor.
      * @param $mobile
      */
-    public function __construct($mobile)
+    public function __construct($origin, $mobile)
     {
+        $this->origin = $origin;
+
         $this->mobile = $mobile;
     }
 

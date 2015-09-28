@@ -10,41 +10,85 @@ namespace App\Classes;
 
 use App\Classes\Eventing\EventGenerator;
 use App\Classes\Parse\Anyphone;
-use Parse\ParseObject;
+use App\Events\OTPWasGenerated;
+use App\Events\PINWasConfirmed;
 
 class OTP
 {
     use EventGenerator;
 
+    private $origin;
+
+    private $mobile;
+
     private $randomCode;
 
-    /**
-     * @return mixed
-     */
+    public function getOrigin()
+    {
+        return $this->origin;
+    }
+
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
     public function getRandomCode()
     {
         return $this->randomCode;
+
+        return $this;
     }
 
-    /**
-     * OTP constructor.
-     * @param $randomCode
-     */
-    public function __construct($randomCode)
+    protected function setOrigin($origin)
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    protected function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    protected function setRandomCode($randomCode)
     {
         $this->randomCode = $randomCode;
     }
 
-    public static function create($mobile)
+    public static function generate($origin, $mobile)
     {
         $randomCode =
             (!Anyphone::getInstance()->setUser($mobile))
                 ? Anyphone::getInstance()->signupParseUserWithRandomCode()
                 : Anyphone::getInstance()->updateParseUserWithRandomCode();
 
-        $otp = new static($randomCode);
+        $otp = new static();
 
-        $otp->raise(new OTPWasCreated($otp));
+        $otp->setMobile(Anyphone::getInstance()->getMobile())
+            ->setOrigin($origin)
+            ->setRandomCode($randomCode);
+
+        $otp->raise(new OTPWasGenerated($otp));
+
+        return $otp;
+    }
+
+    public static function confirm($origin, $mobile, $pin)
+    {
+        if (!Anyphone::getInstance()->validateUser($mobile, $pin))
+            throw new \Exception("not validated");
+
+        $otp = new static();
+
+        $otp->setMobile(Anyphone::getInstance()->getMobile())
+            ->setOrigin($origin)
+            ->setRandomCode($pin);
+
+        $otp->raise(new PINWasConfirmed($otp));
 
         return $otp;
     }
