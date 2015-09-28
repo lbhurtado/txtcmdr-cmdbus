@@ -18,19 +18,15 @@ class PostSurveyCommand
     public $data;
 
     /**
-     * AskQuestionsCommand constructor.
-     * @param $q1
-     * @param $q2
-     * @param $q3
-     * @param $q4
+     * PostSurveyCommand constructor.
+     * @param $code
+     * @param $description
+     * @param $data
      */
     public function __construct($code, $description, $data)
     {
         $this->code = $code;
-
         $this->description = $description;
-
         $this->data = $data;
     }
-
 }

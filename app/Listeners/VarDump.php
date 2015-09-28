@@ -12,6 +12,8 @@ use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
 use App\Events\SurveyWasPosted;
+use App\Events\ResponseWasPosted;
+use App\Events\ResponseWasUpdated;
 
 class VarDump extends Listener
 {
@@ -35,5 +37,14 @@ class VarDump extends Listener
         var_dump($event);
     }
 
+    public function whenResponseWasPosted(ResponseWasPosted $event)
+    {
+        var_dump($event);
+    }
+
+    public function whenResponseWasUpdated(ResponseWasUpdated $event)
+    {
+        var_dump($event);
+    }
     //always add use when{CLASS} up there
 }

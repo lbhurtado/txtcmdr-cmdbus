@@ -12,6 +12,8 @@ use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
 use App\Events\SurveyWasPosted;
+use App\Events\ResponseWasPosted;
+use App\Events\ResponseWasUpdated;
 
 class Logger extends Listener
 {
@@ -29,6 +31,14 @@ class Logger extends Listener
     }
 
     public function whenSurveyWasPosted(SurveyWasPosted $event) {
-        \Log::info("Survey was posted: {$event->survey->code}.");
+        \Log::info("Survey was posted: {$event->survey->description} ({$event->survey->code}).");
+    }
+
+    public function whenResponseWasPosted(ResponseWasPosted $event) {
+        \Log::info("Response was posted: {$event->response->code} [{$event->response->question}:{$event->response->answer}].");
+    }
+
+    public function whenResponseWasUpdated(ResponseWasUpdated $event) {
+        \Log::info("Response was updated: {$event->response->code} [{$event->response->question}:{$event->response->answer}].");
     }
 }

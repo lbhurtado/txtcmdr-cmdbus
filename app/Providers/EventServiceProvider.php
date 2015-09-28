@@ -14,6 +14,8 @@ use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
 use App\Events\SurveyWasPosted;
+use App\Events\ResponseWasPosted;
+use App\Events\ResponseWasUpdated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -42,7 +44,15 @@ class EventServiceProvider extends ServiceProvider
         SurveyWasPosted::class => [
             Logger::class,
             VarDump::class,
-        ]
+        ],
+        ResponseWasPosted::class => [
+            Logger::class,
+            VarDump::class,
+        ],
+        ResponseWasUpdated::class => [
+            Logger::class,
+            VarDump::class,
+        ],
     ];
 
     public function register()

@@ -8,22 +8,27 @@
 
 namespace App\Classes;
 
-use App\Events\SurveyWasPosted;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Classes\Eventing\EventGenerator;
+use App\Events\SurveyWasPosted;
 
 class Survey extends Eloquent
 {
     use EventGenerator;
 
-    protected $fillable = ['code','description','data'];
+    protected $fillable = ['code', 'description', 'data'];
 
     public static function post($code, $description, $data) //add code or description
     {
-        $survey = static::create(compact('code','description','data'));
+        $survey = static::create(compact('code', 'description', 'data'));
 
         $survey->raise(new SurveyWasPosted($survey));
 
         return $survey;
+    }
+
+    public function response()
+    {
+        return $this->hasMany(Response::class, 'code');
     }
 }

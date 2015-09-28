@@ -23,5 +23,7 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
     $app->post('load/{origin:\d+}/{mobile:\d+}/{amount:\d+}', 'TextCommanderController@load');
 
-    $app->post('ask4questions/survey/store/{code}', 'Ask4QuestionsController@store'); //store 4 questions
+    $app->post('ask4questions/survey/store/{code}', 'SurveyController@store'); //store 4 questions
+
+    $app->post('ask4questions/response/store/{code}/{question}/{answer}', 'ResponseController@store');
 });

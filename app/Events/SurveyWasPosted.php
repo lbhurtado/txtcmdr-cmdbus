@@ -25,6 +25,4 @@ class SurveyWasPosted extends Event
     {
         $this->survey = $survey;
     }
-
-
 }
