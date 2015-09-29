@@ -14,6 +14,7 @@ use App\Events\LoadWasPosted;
 use App\Events\SurveyWasPosted;
 use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
+use App\Events\ResponseWasDuplicated;
 
 class Logger extends Listener
 {
@@ -40,5 +41,9 @@ class Logger extends Listener
 
     public function whenResponseWasUpdated(ResponseWasUpdated $event) {
         \Log::info("Response was updated: {$event->response->code} [{$event->response->question}:{$event->response->answer}].");
+    }
+
+    public function whenResponseWasDuplicated(ResponseWasDuplicated $event) {
+        \Log::info("Response was duplicated: {$event->response->code} [{$event->response->question}:{$event->response->answer}].");
     }
 }

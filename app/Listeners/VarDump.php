@@ -14,6 +14,7 @@ use App\Events\LoadWasPosted;
 use App\Events\SurveyWasPosted;
 use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
+use App\Events\ResponseWasDuplicated;
 
 class VarDump extends Listener
 {
@@ -43,6 +44,11 @@ class VarDump extends Listener
     }
 
     public function whenResponseWasUpdated(ResponseWasUpdated $event)
+    {
+        var_dump($event);
+    }
+
+    public function whenResponseWasDuplicated(ResponseWasDuplicated $event)
     {
         var_dump($event);
     }

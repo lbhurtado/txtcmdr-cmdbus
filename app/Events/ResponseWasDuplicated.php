@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: lbhurtado
  * Date: 9/29/15
- * Time: 07:21
+ * Time: 08:02
  */
 
 namespace App\Events;
@@ -11,14 +11,14 @@ namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class ResponseWasUpdated extends Event
+class ResponseWasDuplicated extends Event
 {
     use SerializesModels;
 
     public $response;
 
     /**
-     * ResponseWasUpdated constructor.
+     * ResponseWasDuplicated constructor.
      * @param $response
      */
     public function __construct($response)

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Classes\Eventing\EventGenerator;
 use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
+use App\Events\ResponseWasDuplicated;
 use Illuminate\Database\QueryException;
 
 class Response extends Eloquent
@@ -23,13 +24,18 @@ class Response extends Eloquent
     public static function post($code, $question, $answer) //add code or description
     {
         try {
-            $response = static::firstOrCreate(compact('code', 'question', 'answer'));
+            $response = static::create(compact('code', 'question', 'answer'));
             $response->raise(new ResponseWasPosted($response));
         } catch (QueryException $ex) {
             if ($ex->getCode() == 23000) {
-                $response = static::updateOrCreate(compact('code','question'),compact('code', 'question', 'answer'));
-                $response->raise(new ResponseWasUpdated($response));
-            }
+                $response = static::firstOrCreate(compact('code', 'question'));
+                if ($response->answer != $answer) {
+                    $response->answer = $answer;
+                    $response->save();
+                    $response->raise(new ResponseWasUpdated($response));
+                } else
+                    $response->raise(new ResponseWasDuplicated($response));
+            } else throw $ex;
         }
 
         return $response;
