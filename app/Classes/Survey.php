@@ -31,4 +31,8 @@ class Survey extends Eloquent
     {
         return $this->hasMany(Response::class, 'code');
     }
+
+    public function getData(){
+        return json_decode($this->data);
+    }
 }

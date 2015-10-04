@@ -24,6 +24,14 @@ class Response extends Eloquent
     public static function post($code, $question, $answer) //add code or description
     {
         try {
+            if ($survey = Survey::firstOrCreate(compact('code'))) {
+                foreach ($survey->getData()->q1->choices as $key => $value) {
+                    if ($key == $answer) {
+                        var_dump($key);
+                    }
+                }
+            }
+
             $response = static::create(compact('code', 'question', 'answer'));
             $response->raise(new ResponseWasPosted($response));
         } catch (QueryException $ex) {

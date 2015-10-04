@@ -12,17 +12,36 @@ use Exception;
 
 class CommandTranslator
 {
-    public function toCommandHandler($command){
+    private $command;
 
-        $reflection_class = new \ReflectionClass($command);
+    private $reflection_class;
 
-        $namespace = $reflection_class->getNamespaceName();
+    private function setCommand($command)
+    {
+        $this->command = $command;
 
-        $shortname = $reflection_class->getShortName();
+        $this->reflection_class = new \ReflectionClass($command);
 
-        $handler =  $namespace . "\\" . str_replace('Command', 'CommandHandler', $shortname);
+        return $this;
+    }
 
-        if ( ! class_exists($handler)) {
+    private function getNameSpace()
+    {
+        return $this->reflection_class->getNamespaceName();
+    }
+
+    private function getShortName()
+    {
+        return $this->reflection_class->getShortName();
+    }
+
+    public function toCommandHandler($command)
+    {
+        $this->setCommand($command);
+
+        $handler = $this->getNameSpace() . "\\" . str_replace('Command', 'CommandHandler', $this->getShortName());
+
+        if (!class_exists($handler)) {
             $message = "Command handler [$handler] does not exist.";
 
             throw new Exception($message);
@@ -31,7 +50,13 @@ class CommandTranslator
         return $handler;
     }
 
-    public function toValidator($command){
-        return str_replace('Command', 'Validator', get_class($command));
+    public function toValidator($command)
+    {
+        $this->setCommand($command);
+
+        $validator = $this->getNameSpace() . "\\" . str_replace('Command', 'Validator', $this->getShortName());
+
+        //return str_replace('Command', 'Validator', get_class($command));
+        return $validator;
     }
 }
