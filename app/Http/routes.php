@@ -26,4 +26,13 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
     $app->post('ask4questions/survey/store/{code}', 'SurveyController@store'); //store 4 questions
 
     $app->post('ask4questions/response/store/{code}/{question}/{answer}', 'ResponseController@store');
+
+});
+
+$app->group(['prefix' => 'region', 'namespace' => 'App\Http\Controllers'], function ($app) {
+
+    $app->get('/{code}', 'RegionController@getRegion');
+
+    $app->get('/', 'RegionController@index');
+
 });

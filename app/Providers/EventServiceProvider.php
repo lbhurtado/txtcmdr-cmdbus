@@ -60,10 +60,12 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    /*
     public function register()
     {
         Event::listen("App\Events\*", function () {
             var_dump($this->listen);
         });
     }
+    */
 }
