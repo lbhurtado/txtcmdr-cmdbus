@@ -29,9 +29,17 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
 });
 
-$app->group(['prefix' => 'region', 'namespace' => 'App\Http\Controllers'], function ($app) {
+$app->group(['prefix' => 'philippines', 'namespace' => 'App\Http\Controllers'], function ($app) {
 
-    $app->get('/{code}', 'RegionController@getRegion');
+    $app->get('province/{region_id:\d{9}}', 'RegionController@getProvince');
+
+    $app->get('provinces', 'RegionController@provinces');
+
+    $app->get('region/{region_id:\d{9}}', 'RegionController@getRegion');
+
+    $app->get('region/{code}', 'RegionController@getRegionFromCode');
+
+    $app->get('regions', 'RegionController@regions');
 
     $app->get('/', 'RegionController@index');
 
