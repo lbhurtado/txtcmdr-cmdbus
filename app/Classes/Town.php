@@ -10,7 +10,16 @@ namespace app\Classes;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
+use App\Classes\Province;
+
 class Town extends Eloquent
 {
+    protected $fillable = ['id', 'name'];
 
+    protected $hidden = ['province_id'];
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }
