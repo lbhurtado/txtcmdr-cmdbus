@@ -14,7 +14,9 @@ use App\Classes\Province;
 
 class Region extends Eloquent
 {
-    protected $fillable = ['code', 'name'];
+    protected $fillable = ['id', 'name', 'code'];
+
+    public $timestamps = false;
 
     public function provinces()
     {

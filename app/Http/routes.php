@@ -31,15 +31,17 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
 
-    $app->get('/', 'GeoPoliticalController@index');
-    $app->get('regions', 'GeoPoliticalController@getRegions');
-    $app->get('provinces', 'GeoPoliticalController@getProvinces');
-    $app->get('towns', 'GeoPoliticalController@getTowns');
+    $app->get('regions', 'RegionController@index');
+    $app->post('regions', 'RegionController@store');
 
-    $app->get('region/{id:\d{9}}', 'GeoPoliticalController@getRegion');
-    $app->get('region/{code}', 'GeoPoliticalController@getRegionFromCode');
+    $app->get('regions/{id:\d{9}}', 'RegionController@getRegion');
+    $app->get('regions/{code}', 'RegionController@getRegionFromCode');
 
-    $app->get('province/{id:\d{9}}', 'GeoPoliticalController@getProvince');
-    $app->get('town/{id:\d{9}}', 'GeoPoliticalController@getTown');
+    $app->get('provinces', 'ProvinceController@index');
+    $app->get('provinces/{id:\d{9}}', 'ProvinceController@getProvince');
+
+    $app->get('towns', 'TownController@index');
+    $app->get('towns/{id:\d{9}}', 'TownController@getTown');
+
 
 });

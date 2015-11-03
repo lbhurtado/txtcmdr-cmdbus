@@ -33,7 +33,6 @@ class ProvincesTableSeeder extends Seeder
             ['region_id' => '030000000', 'id' => '031400000', 'name' => 'Bulacan'],
             ['region_id' => '030000000', 'id' => '034900000', 'name' => 'Nueva Ecija'],
             ['region_id' => '030000000', 'id' => '037700000', 'name' => 'Aurora'],
-
         );
 
         // Uncomment the below to run the seeder
