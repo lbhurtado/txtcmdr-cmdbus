@@ -10,7 +10,7 @@ namespace App\Classes;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-use App\Classes\Province;
+//use App\Classes\Province;
 
 class Region extends Eloquent
 {

@@ -10,13 +10,15 @@ namespace app\Classes;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-use App\Classes\Province;
+//use App\Classes\Province;
 
 class Town extends Eloquent
 {
     protected $fillable = ['id', 'name'];
 
     protected $hidden = ['province_id'];
+
+    public $timestamps = false;
 
     public function province()
     {

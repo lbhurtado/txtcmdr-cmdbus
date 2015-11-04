@@ -11,6 +11,7 @@ namespace App\Listeners;
 use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
 use App\Events\LoadWasPosted;
+use App\Events\PassageWasPosted;
 use \Telerivet_API;
 
 define('API_KEY', env('TELERIVET_API_KEY'));
@@ -52,6 +53,14 @@ class SMSNotifier extends Listener
         $this->project->sendMessage(array(
             'to_number' => $event->otp->getMobile(),
             'content' => "PIN was confirmed from origin..."
+        ));
+    }
+
+    public function whenPassageWasPosted(PassageWasPosted $event) {
+        $content = app('App\Http\Controllers\BibleController')->getPassage($command->passage);
+        $this->project->sendMessage(array(
+            'to_number' => $event->passage->getDestination(),
+            'content' => $content
         ));
     }
 }

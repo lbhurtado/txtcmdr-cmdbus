@@ -9,23 +9,29 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class ApiController extends BaseController
 {
-    protected $statusCode = 200;
-    const HTTP_NOT_FOUND = 404;
+    protected $statusCode = Response::HTTP_OK;
+
+    protected $request;
 
     /**
-     * @return mixed
+     * ApiController constructor.
+     * @param $request
      */
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
     public function getStatusCode()
     {
         return $this->statusCode;
     }
 
-    /**
-     * @param mixed $statusCode
-     */
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
@@ -50,18 +56,23 @@ class ApiController extends BaseController
 
     public function respondNotFound($message = 'Not Found!')
     {
-        return $this->setStatusCode(self::HTTP_NOT_FOUND)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_NOT_FOUND)->respondWithError($message);
     }
 
     public function respondInternalError($message = 'Internal Error!')
     {
-        return $this->setStatusCode(500)->respondWithError($message);
+        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)->respondWithError($message);
     }
 
     public function respondCreated($message)
     {
-        return $this->setStatusCode(201)->respond([
+        return $this->setStatusCode(Response::HTTP_CREATED)->respond([
             'message' => $message
         ]);
+    }
+
+    public function respondUnprocessable()
+    {
+        return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)->respondWithError("Unprocessable! Parameters failure.");
     }
 }

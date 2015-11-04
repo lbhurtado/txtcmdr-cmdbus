@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Commands\GenerateOTPCommand;
 use App\Commands\ConfirmPINCommand;
 use App\Commands\LoadMobileCommand;
+use App\Commands\PostPassageCommand;
 
 class TextCommanderController extends Controller
 {
@@ -31,6 +32,13 @@ class TextCommanderController extends Controller
     public function load($origin, $mobile, $amount)
     {
         $command = new LoadMobileCommand($origin, $mobile, $amount);
+
+        $this->commandBus->execute($command);
+    }
+
+    public function read($origin, $destination, $passage)
+    {
+        $command = new PostPassageCommand($origin, $destination, $passage);
 
         $this->commandBus->execute($command);
     }

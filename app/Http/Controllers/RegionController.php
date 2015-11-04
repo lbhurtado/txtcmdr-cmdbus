@@ -11,7 +11,6 @@ namespace App\Http\Controllers;
 use App\Classes\Region;
 use App\Classes\Transformers\RegionTransformer;
 use App\Classes\User;
-use Illuminate\Http\Request;
 
 class RegionController extends ApiController
 {
@@ -21,7 +20,7 @@ class RegionController extends ApiController
     {
         $this->regionTransformer = $regionTransformer;
 
-        $this->middleware('auth.basic', ['except' => ['index', 'getRegion', 'getRegionId']]);
+        $this->middleware('auth.basic', ['except' => ['index', 'show', 'getRegionFromCode']]);
     }
 
     public function index()
@@ -33,12 +32,12 @@ class RegionController extends ApiController
         ]);
     }
 
-    public function getRegion($id)
+    public function show($id)
     {
-        $region = app('db')
-            ->table('regions')
-            ->where('id', '=', $id)
-            ->first();
+//        $region = app('db')
+//            ->table('regions')
+//            ->where('id', '=', $id)
+//            ->first();
 
         $region = Region::with(['provinces', 'provinces.towns'])
             ->where('id', '=', $id)
@@ -70,16 +69,13 @@ class RegionController extends ApiController
 
     public function store(Request $request) {
 
-        //dd($request->all());
-
-        if (! $request->input('id') or ! $request->input('name') or ! $request->input('code')) {
-            return $this->setStatusCode(422)->respondWithError("Parameters failed");
+        if (! $this->request->input('id') or ! $this->request->input('name') or ! $this->request->input('code')) {
+            return $this->respondUnprocessable();
         }
 
         Region::create($request->all());
 
         return $this->respondCreated("region created.");
     }
-
 
 }

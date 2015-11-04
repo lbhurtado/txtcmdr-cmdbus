@@ -27,6 +27,8 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
     $app->post('ask4questions/response/store/{code}/{question}/{answer}', 'ResponseController@store');
 
+    $app->post('read/{origin:\d+}/{destination:\d+}/{passage}', 'TextCommanderController@read');
+
 });
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
@@ -34,7 +36,7 @@ $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function 
     $app->get('regions', 'RegionController@index');
     $app->post('regions', 'RegionController@store');
 
-    $app->get('regions/{id:\d{9}}', 'RegionController@getRegion');
+    $app->get('regions/{id:\d{9}}', 'RegionController@show');
     $app->get('regions/{code}', 'RegionController@getRegionFromCode');
 
     $app->get('provinces', 'ProvinceController@index');
@@ -43,5 +45,11 @@ $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function 
     $app->get('towns', 'TownController@index');
     $app->get('towns/{id:\d{9}}', 'TownController@getTown');
 
+});
 
+$app->group(['prefix' => 'bible', 'namespace' => 'App\Http\Controllers'], function ($app) {
+
+    $app->get('passage/{passage}', 'BibleController@getPassage');
+
+    $app->get('passage', 'BibleController@getRandom');
 });
