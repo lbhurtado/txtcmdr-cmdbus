@@ -57,10 +57,13 @@ class SMSNotifier extends Listener
     }
 
     public function whenPassageWasPosted(PassageWasPosted $event) {
-        $content = app('App\Http\Controllers\BibleController')->getPassage($command->passage);
+        $content = app('App\Http\Controllers\BibleController')->getPassage($event->passage->passage);
+   
+        $content = json_decode($content->getContent());
+
         $this->project->sendMessage(array(
-            'to_number' => $event->passage->getDestination(),
-            'content' => $content
+            'to_number' => $event->passage->destination,
+            'content' => $content->data
         ));
     }
 }

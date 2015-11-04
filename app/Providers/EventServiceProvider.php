@@ -62,6 +62,7 @@ class EventServiceProvider extends ServiceProvider
         PassageWasPosted::class => [
             Logger::class,
             VarDump::class,
+            SMSNotifier::class,
         ]
     ];
 
