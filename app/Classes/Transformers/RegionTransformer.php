@@ -18,10 +18,11 @@ class RegionTransformer extends Transformer
 //            'name'      => $region['name'],
 //            'key'       => $region['code'],
 //            'provinces' => $region['provinces']
-            'id'        => $region->id,
-            'name'      => $region->name,
-            'key'       => $region->code,
-            'provinces' => $region->provinces
+            'id'            => $region->id,
+            'name'          => $region->name,
+            'key'           => $region->code,
+//            'island group'  => $region->island_group,
+//            'provinces'     => $region->provinces
         ];
     }
 }

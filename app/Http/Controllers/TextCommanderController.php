@@ -13,6 +13,13 @@ use App\Commands\ConfirmPINCommand;
 use App\Commands\LoadMobileCommand;
 use App\Commands\PostPassageCommand;
 
+use Parse\ParseObject;
+use Parse\ParseUser;
+use Parse\ParseQuery;
+use Parse\ParseCloud;
+use Parse\ParseACL;
+use Parse\ParseException;
+
 class TextCommanderController extends Controller
 {
     public function challenge($origin, $mobile)
@@ -41,5 +48,15 @@ class TextCommanderController extends Controller
         $command = new PostPassageCommand($origin, $destination, $passage);
 
         $this->commandBus->execute($command);
+    }
+
+    public function users() {
+        $query = ParseUser::query();
+        $results = $query->find(true);
+        echo "Successfully retrieved " . count($results) . " users.\n";
+        for ($i = 0; $i < count($results); $i++) {
+            $object = $results[$i];
+            echo $object->getObjectId() . ' - ' . $object->get('username') . "\n";
+        }
     }
 }

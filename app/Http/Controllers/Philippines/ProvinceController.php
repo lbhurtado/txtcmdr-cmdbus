@@ -6,10 +6,11 @@
  * Time: 07:19
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Philippines;
 
-use App\Classes\Province;
+use App\Classes\Philippines\Province;
 use App\Classes\Transformers\ProvinceTransformer;
+use App\Http\Controllers\ApiController;
 
 class ProvinceController extends ApiController
 {

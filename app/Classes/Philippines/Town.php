@@ -6,11 +6,9 @@
  * Time: 2:23 PM
  */
 
-namespace app\Classes;
+namespace App\Classes\Philippines;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-
-//use App\Classes\Province;
 
 class Town extends Eloquent
 {

@@ -6,29 +6,46 @@
  * Time: 2:28 PM
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Philippines;
 
-use App\Classes\Region;
+use App\Classes\Philippines\Region;
 use App\Classes\Transformers\RegionTransformer;
-use App\Classes\User;
+use App\Http\Controllers\ApiController;
+use Illuminate\Http\Request;
 
 class RegionController extends ApiController
 {
     protected $regionTransformer;
 
-    public function __construct(RegionTransformer $regionTransformer)
+    public function __construct(Request $request, RegionTransformer $regionTransformer)
     {
+        parent::__construct($request);
+
         $this->regionTransformer = $regionTransformer;
 
-        $this->middleware('auth.basic', ['except' => ['index', 'show', 'getRegionFromCode']]);
+        $this->middleware('auth.basic', ['except' => ['index', 'getRegionsWithinIslandGroup', 'show', 'getRegionFromCode']]);
     }
 
     public function index()
     {
-        $regions = Region::with(['provinces', 'provinces.towns'])->get();
+        if ((bool) $this->request->get('deep', false) == true)
+            $regions = Region::with(['island_group', 'provinces', 'provinces.towns'])->get();
+        else
+           $regions = Region::get(['id', 'name', 'code']);
 
         return $this->respond([
-            'data' => $this->regionTransformer->transformCollection($regions)
+            // 'data' => $this->regionTransformer->transformCollection($regions)
+            //use fractals
+            'data' => $regions
+        ]);
+    }
+
+    public function getRegionsWithinIslandGroup($id) {
+        $regions = Region::where('island_group_id', '=', $id)
+            ->get(['id', 'name', 'code']);
+
+        return $this->respond([
+            'data' => $regions
         ]);
     }
 

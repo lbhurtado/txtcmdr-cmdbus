@@ -12,10 +12,17 @@ class CreateRegionsTable extends Migration
      */
     public function up()
     {
+        Schema::create('island_groups', function (Blueprint $table) {
+            $table->char('id', 1)->primary();
+            $table->string('name')->unique();
+        });
+
         Schema::create('regions', function (Blueprint $table) {
             $table->char('id', 9)->primary();
             $table->string('name')->unique();
             $table->string('code')->unique();
+            $table->char('island_group_id',1);
+            $table->foreign('island_group_id')->references('id')->on('island_groups')->onDelete('cascade');
         });
 
         Schema::create('provinces', function (Blueprint $table) {
@@ -45,5 +52,6 @@ class CreateRegionsTable extends Migration
         Schema::drop('towns');
         Schema::drop('provinces');
         Schema::drop('regions');
+        Schema::drop('island_groups');
     }
 }

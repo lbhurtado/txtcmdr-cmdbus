@@ -6,10 +6,11 @@
  * Time: 07:23
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Philippines;
 
-use App\Classes\Town;
+use App\Classes\Philippines\Town;
 use App\Classes\Transformers\TownTransformer;
+use App\Http\Controllers\ApiController;
 
 class TownController  extends ApiController
 {

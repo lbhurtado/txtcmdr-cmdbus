@@ -10,7 +10,6 @@ namespace App\Listeners;
 
 use App\Events\OTPWasGenerated;
 use App\Events\PINWasConfirmed;
-use App\Events\LoadWasPosted;
 use App\Events\PassageWasPosted;
 use \Telerivet_API;
 

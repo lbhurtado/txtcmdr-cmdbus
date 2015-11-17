@@ -6,17 +6,20 @@
  * Time: 2:19 PM
  */
 
-namespace App\Classes;
+namespace App\Classes\Philippines;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-
-//use App\Classes\Province;
 
 class Region extends Eloquent
 {
     protected $fillable = ['id', 'name', 'code'];
 
     public $timestamps = false;
+
+    public function island_group()
+    {
+        return $this->belongsTo(IslandGroup::class);
+    }
 
     public function provinces()
     {

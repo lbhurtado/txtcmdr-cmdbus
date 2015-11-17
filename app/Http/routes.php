@@ -29,21 +29,27 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
     $app->post('read/{origin:\d+}/{destination:\d+}/{passage}', 'TextCommanderController@read');
 
+    $app->get('users', 'TextCommanderController@users');
+
 });
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
 
-    $app->get('regions', 'RegionController@index');
-    $app->post('regions', 'RegionController@store');
+    $app->get('islandgroups', 'Philippines\IslandGroupController@index');
+    $app->get('{code}/regions', 'Philippines\RegionController@getRegionsWithinIslandGroup');
 
-    $app->get('regions/{id:\d{9}}', 'RegionController@show');
-    $app->get('regions/{code}', 'RegionController@getRegionFromCode');
 
-    $app->get('provinces', 'ProvinceController@index');
-    $app->get('provinces/{id:\d{9}}', 'ProvinceController@getProvince');
+    $app->get('regions', 'Philippines\RegionController@index');
+    $app->post('regions', 'Philippines\RegionController@store');
 
-    $app->get('towns', 'TownController@index');
-    $app->get('towns/{id:\d{9}}', 'TownController@getTown');
+    $app->get('regions/{id:\d{9}}', 'Philippines\RegionController@show');
+    $app->get('regions/{code}', 'Philippines\RegionController@getRegionFromCode');
+
+    $app->get('provinces', 'Philippines\ProvinceController@index');
+    $app->get('provinces/{id:\d{9}}', 'Philippines\ProvinceController@getProvince');
+
+    $app->get('towns', 'Philippines\TownController@index');
+    $app->get('towns/{id:\d{9}}', 'Philippines\TownController@getTown');
 
 });
 
@@ -53,3 +59,5 @@ $app->group(['prefix' => 'bible', 'namespace' => 'App\Http\Controllers'], functi
 
     $app->get('passage', 'BibleController@getRandom');
 });
+
+
