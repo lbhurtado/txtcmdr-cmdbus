@@ -36,8 +36,8 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
 
     $app->get('islandgroups', 'Philippines\IslandGroupController@index');
-    $app->get('{code}/regions', 'Philippines\RegionController@getRegionsWithinIslandGroup');
-
+    $app->get('{islandgroup_id}/regions', 'Philippines\RegionController@getRegionsWithinIslandGroup');
+    $app->get('{region_code}/provinces', 'Philippines\ProvinceController@getProvincessWithinRegion');
 
     $app->get('regions', 'Philippines\RegionController@index');
     $app->post('regions', 'Philippines\RegionController@store');

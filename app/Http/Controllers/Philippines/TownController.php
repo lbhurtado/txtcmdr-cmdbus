@@ -11,22 +11,30 @@ namespace App\Http\Controllers\Philippines;
 use App\Classes\Philippines\Town;
 use App\Classes\Transformers\TownTransformer;
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\Request;
 
-class TownController  extends ApiController
+class TownController extends ApiController
 {
     protected $townTransformer;
 
-    public function __construct(TownTransformer $townTransformer)
+    public function __construct(Request $request, TownTransformer $townTransformer)
     {
+        parent::__construct($request);
+
         $this->townTransformer = $townTransformer;
     }
 
     public function index()
     {
-        $towns = Town::with(['province', 'province.region'])->get();
+        if ((bool) $this->request->get('deep', false) == true)
+            $towns = Town::with(['province', 'province.region'])->get();
+        else
+            $towns = Town::get(['id', 'name']);
 
         return $this->respond([
-            'data' => $this->townTransformer->transformCollection($towns)
+//            'data' => $this->townTransformer->transformCollection($towns)
+            //use fractals
+            'data' => $towns
         ]);
     }
 

@@ -40,8 +40,8 @@ class RegionController extends ApiController
         ]);
     }
 
-    public function getRegionsWithinIslandGroup($id) {
-        $regions = Region::where('island_group_id', '=', $id)
+    public function getRegionsWithinIslandGroup($islandgroup_id) {
+        $regions = Region::where('island_group_id', '=', $islandgroup_id)
             ->get(['id', 'name', 'code']);
 
         return $this->respond([
