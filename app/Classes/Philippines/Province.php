@@ -16,6 +16,8 @@ class Province extends Eloquent
 
     protected $hidden = ['region_id'];
 
+    protected $appends = ['code'];
+
     public $timestamps = false;
 
     public function region()
@@ -26,5 +28,9 @@ class Province extends Eloquent
     public function towns()
     {
         return $this->hasMany(Town::class);
+    }
+
+    public function getCodeAttribute() {
+        return  substr($this->id, 0, 4);
     }
 }
