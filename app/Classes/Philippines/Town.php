@@ -16,10 +16,16 @@ class Town extends Eloquent
 
     protected $hidden = ['province_id'];
 
+    protected $appends = ['code'];
+
     public $timestamps = false;
 
     public function province()
     {
         return $this->belongsTo(Province::class);
+    }
+
+    public function getCodeAttribute() {
+        return  substr($this->id, 0, 6);
     }
 }

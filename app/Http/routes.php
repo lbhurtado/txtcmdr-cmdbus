@@ -37,7 +37,8 @@ $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function 
 
     $app->get('islandgroups', 'Philippines\IslandGroupController@index');
     $app->get('{islandgroup_id}/regions', 'Philippines\RegionController@getRegionsWithinIslandGroup');
-    $app->get('{region_code}/provinces', 'Philippines\ProvinceController@getProvincessWithinRegion');
+    $app->get('{region_code}/provinces', 'Philippines\ProvinceController@getProvincesWithinRegion');
+    $app->get('{province_code}/towns', 'Philippines\TownController@getTownsWithinProvince');
 
     $app->get('regions', 'Philippines\RegionController@index');
     $app->post('regions', 'Philippines\RegionController@store');

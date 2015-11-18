@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Philippines;
 
 use App\Classes\Philippines\Town;
+use App\Classes\Philippines\Province;
 use App\Classes\Transformers\TownTransformer;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
@@ -46,6 +47,16 @@ class TownController extends ApiController
 
         return $this->respond([
             'data' => $this->townTransformer->transform($town)
+        ]);
+    }
+
+    public function getTownsWithinProvince($province_code) {
+
+        $towns = Town::where('province_id', '=', $province_code . "00000")
+            ->get();
+
+        return $this->respond([
+            'data' => $towns
         ]);
     }
 }

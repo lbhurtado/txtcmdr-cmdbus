@@ -50,13 +50,13 @@ class ProvinceController extends ApiController
         ]);
     }
 
-    public function getProvincessWithinRegion($region_code) {
+    public function getProvincesWithinRegion($region_code) {
         $region = Region::where('code', '=', $region_code)
             ->first();
 
         $region_id = $region->id;
         $provinces = Province::where('region_id', '=', $region_id)
-            ->get(['id', 'name']);
+            ->get();
 
         return $this->respond([
             'data' => $provinces
