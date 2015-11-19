@@ -8,7 +8,6 @@
 
 namespace App\Events;
 
-
 use Illuminate\Queue\SerializesModels;
 
 class ResponseWasDuplicated extends Event

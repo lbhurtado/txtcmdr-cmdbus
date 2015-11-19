@@ -17,6 +17,8 @@ use App\Events\ResponseWasUpdated;
 use App\Events\ResponseWasDuplicated;
 use App\Events\PassageWasPosted;
 use App\Events\SettingWasPosted;
+use App\Events\SettingWasDuplicated;
+use App\Events\SettingWasUpdated;
 
 class Logger extends Listener
 {
@@ -55,5 +57,13 @@ class Logger extends Listener
 
     public function whenSettingWasPosted(SettingWasPosted $event) {
         \Log::info("Setting was posted: {$event->setting->code} : [{$event->setting->json}]");
+    }
+
+    public function whenSettingWasDuplicated(SettingWasDuplicated $event) {
+        \Log::warning("Setting was duplicated: {$event->setting->code} : [{$event->setting->json}]");
+    }
+
+    public function whenSettingWasUpdated(SettingWasUpdated $event) {
+        \Log::info("Setting was updated: {$event->setting->code} : [{$event->setting->json}]");
     }
 }

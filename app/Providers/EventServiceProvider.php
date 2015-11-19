@@ -19,6 +19,8 @@ use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
 use App\Events\PassageWasPosted;
 use App\Events\SettingWasPosted;
+use App\Events\SettingWasDuplicated;
+use App\Events\SettingWasUpdated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -66,6 +68,12 @@ class EventServiceProvider extends ServiceProvider
             SMSNotifier::class,
         ],
         SettingWasPosted::class => [
+            Logger::class
+        ],
+        SettingWasDuplicated::class => [
+            Logger::class
+        ],
+        SettingWasUpdated::class => [
             Logger::class
         ],
     ];

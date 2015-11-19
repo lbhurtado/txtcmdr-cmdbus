@@ -15,9 +15,11 @@ use Illuminate\Http\Response;
 
 class SettingController extends ApiController
 {
-    public function getSetting($code, SettingTransformer $settingTransformer)
+    public function getSetting($project, $key, SettingTransformer $settingTransformer)
     {
-        $setting = Setting::where('code', '=', $code)->first();
+        $code = $project . "." . $key;
+
+        $setting = Setting::where('code', '=', $code)->firstOrFail();
 
         return $this->respond([
             'data' => $settingTransformer->transform($setting)
@@ -27,7 +29,9 @@ class SettingController extends ApiController
     public function setSetting($project, $key)
     {
         $code = $project . "." . $key;
+
         $json = $this->request->get('value');
+
         $description = $this->request->get('description');
 
         $command = new PostSettingCommand($code, $json, $description);
