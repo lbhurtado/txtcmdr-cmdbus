@@ -44,15 +44,10 @@ class SettingController extends ApiController
                         array_push($original, $value);
                     }
                 }
-                var_dump(json_decode($setting->json));
-
-                var_dump($original);
 
                 $json = $original;
             }
-
         }
-
 
         $description = $this->request->get('description');
 
