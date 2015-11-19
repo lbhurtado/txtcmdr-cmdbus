@@ -31,6 +31,10 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
     $app->get('users', 'TextCommanderController@users');
 
+    $app->get('settings/{code}', 'SettingController@getSetting');
+
+    $app->post('settings/{project}/{key}', 'SettingController@setSetting');
+
 });
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {

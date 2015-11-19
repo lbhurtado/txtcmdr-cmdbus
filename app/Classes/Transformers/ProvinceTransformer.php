@@ -11,13 +11,13 @@ namespace App\Classes\Transformers;
 
 class ProvinceTransformer extends Transformer
 {
-    public function transform($province)
+    public function transform($setting)
     {
         return [
-            'id'    => $province->id,
-            'name'  => $province->name,
-            'region'=> $province->region,
-            'municipalities' => $province->towns
+            'id'    => $setting->id,
+            'name'  => $setting->name,
+            'region'=> $setting->region,
+            'municipalities' => $setting->towns
         ];
     }
 }

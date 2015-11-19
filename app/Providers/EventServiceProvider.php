@@ -18,6 +18,7 @@ use App\Events\SurveyWasPosted;
 use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
 use App\Events\PassageWasPosted;
+use App\Events\SettingWasPosted;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -63,7 +64,10 @@ class EventServiceProvider extends ServiceProvider
             Logger::class,
             VarDump::class,
             SMSNotifier::class,
-        ]
+        ],
+        SettingWasPosted::class => [
+            Logger::class
+        ],
     ];
 
     /*

@@ -16,6 +16,7 @@ use App\Events\ResponseWasPosted;
 use App\Events\ResponseWasUpdated;
 use App\Events\ResponseWasDuplicated;
 use App\Events\PassageWasPosted;
+use App\Events\SettingWasPosted;
 
 class Logger extends Listener
 {
@@ -50,5 +51,9 @@ class Logger extends Listener
 
     public function whenPassageWasPosted(PassageWasPosted $event) {
         \Log::info("Passage was posted: {$event->passage->origin} [{$event->passage->destination}:{$event->passage->passage}].");
+    }
+
+    public function whenSettingWasPosted(SettingWasPosted $event) {
+        \Log::info("Setting was posted: {$event->setting->code} : [{$event->setting->json}]");
     }
 }

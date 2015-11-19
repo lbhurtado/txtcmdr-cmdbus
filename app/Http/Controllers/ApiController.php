@@ -8,24 +8,13 @@
 
 namespace App\Http\Controllers;
 
-use Laravel\Lumen\Routing\Controller as BaseController;
+//use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
-class ApiController extends BaseController
+class ApiController extends Controller
 {
     protected $statusCode = Response::HTTP_OK;
-
-    protected $request;
-
-    /**
-     * ApiController constructor.
-     * @param $request
-     */
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
 
     public function getStatusCode()
     {
