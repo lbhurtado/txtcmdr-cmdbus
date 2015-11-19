@@ -32,6 +32,28 @@ class SettingController extends ApiController
 
         $json = $this->request->get('value');
 
+        if ($this->request->get('append', false)) {
+
+            $setting = Setting::where('code', '=', $code)->firstOrFail();
+
+            $original = json_decode($setting->json);
+
+            if (is_array($original)) {
+                foreach ($json as $value) {
+                    if (!in_array($value, $original)) {
+                        array_push($original, $value);
+                    }
+                }
+                var_dump(json_decode($setting->json));
+
+                var_dump($original);
+
+                $json = $original;
+            }
+
+        }
+
+
         $description = $this->request->get('description');
 
         $command = new PostSettingCommand($code, $json, $description);
