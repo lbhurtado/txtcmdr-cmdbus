@@ -26,7 +26,7 @@ class SettingController extends ApiController
         ]);
     }
 
-    public function setSetting($project, $key)
+    public function setSetting($project, $key, SettingTransformer $settingTransformer)
     {
         $code = $project . "." . $key;
 
@@ -37,5 +37,7 @@ class SettingController extends ApiController
         $command = new PostSettingCommand($code, $json, $description);
 
         $this->commandBus->execute($command);
+
+        return $this->getSetting($project, $key, $settingTransformer);
     }
 }
