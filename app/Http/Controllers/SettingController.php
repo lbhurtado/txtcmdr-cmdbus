@@ -38,12 +38,17 @@ class SettingController extends ApiController
             $operation = $this->request->get('operation', 'replace');
             switch (strtolower($operation)) {
                 case 'append':
+                case 'insert':
+                case 'add':
                     $json = array_merge(array_diff($valueFromSettingFromCode, $json), $json);
                     break;
+                case 'delete':
+                case 'cut':
                 case 'remove':
                     $json = array_diff($valueFromSettingFromCode, $json);
                     break;
                 case 'empty':
+                case 'unset':
                     $json = [];
                     break;
             }
