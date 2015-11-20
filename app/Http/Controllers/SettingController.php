@@ -32,25 +32,16 @@ class SettingController extends ApiController
 
         $json = $this->request->get('value');
 
-            $setting = Setting::where('code', '=', $code)->firstOrFail();
+        $settingFromCode = Setting::where('code', $code)->firstOrFail();
 
-            $original = json_decode($setting->json);
+        $valueFromSettingFromCode = json_decode($settingFromCode->json);
 
-        if ($this->request->get('append', false)) {
-
-            if (is_array($original)) {
-                foreach ($json as $value) {
-                    if (!in_array($value, $original)) {
-                        array_push($original, $value);
-                    }
-                }
-
-                $json = $original;
+        if (is_array($valueFromSettingFromCode)) {
+            if ($this->request->get('append', false)) {
+                $json = array_merge(array_diff($valueFromSettingFromCode, $json), $json);
             }
-        }
-        else if ($this->request->get('remove', false)) {
-            if (is_array($original)) {
-                $json = array_diff($original, $json);
+            else if ($this->request->get('remove', false)) {
+                $json = array_diff($valueFromSettingFromCode, $json);
             }
         }
 
