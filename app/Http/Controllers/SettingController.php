@@ -45,7 +45,7 @@ class SettingController extends ApiController
                 case 'delete':
                 case 'cut':
                 case 'remove':
-                    $json = array_diff($valueFromSettingFromCode, $json);
+                    $json = array_values(array_diff($valueFromSettingFromCode, $json));
                     break;
                 case 'empty':
                 case 'unset':
