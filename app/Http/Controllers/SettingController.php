@@ -36,7 +36,7 @@ class SettingController extends ApiController
         $valueFromSettingFromCode = json_decode($settingFromCode->json);
         if (is_array($valueFromSettingFromCode)) {
             $operation = $this->request->get('operation', 'replace');
-            switch ($operation) {
+            switch (strtolower($operation)) {
                 case 'append':
                     $json = array_merge(array_diff($valueFromSettingFromCode, $json), $json);
                     break;
@@ -50,7 +50,7 @@ class SettingController extends ApiController
         }
 
         $descriptionFromSettingFromCode = $settingFromCode->description;
-        
+
         $description = $this->request->get('description', $descriptionFromSettingFromCode);
 
         $command = new PostSettingCommand($code, $json, $description);
