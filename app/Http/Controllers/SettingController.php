@@ -32,11 +32,11 @@ class SettingController extends ApiController
 
         $json = $this->request->get('value');
 
-        if ($this->request->get('append', false)) {
-
             $setting = Setting::where('code', '=', $code)->firstOrFail();
 
             $original = json_decode($setting->json);
+
+        if ($this->request->get('append', false)) {
 
             if (is_array($original)) {
                 foreach ($json as $value) {
@@ -46,6 +46,11 @@ class SettingController extends ApiController
                 }
 
                 $json = $original;
+            }
+        }
+        else if ($this->request->get('remove', false)) {
+            if (is_array($original)) {
+                $json = array_diff($original, $json);
             }
         }
 
