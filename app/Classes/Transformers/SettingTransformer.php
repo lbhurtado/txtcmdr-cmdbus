@@ -10,12 +10,13 @@ namespace App\Classes\Transformers;
 
 class SettingTransformer extends Transformer
 {
+
     public function transform($setting)
     {
         return [
-            'key'           => $setting->code,
-            'value'         => json_decode($setting->json),
-            'description'   => $setting->description
+            'key' => $setting->code,
+            'value' => json_decode($setting->json),
+            'description' => $setting->description
         ];
     }
 }

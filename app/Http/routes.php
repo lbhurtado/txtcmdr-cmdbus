@@ -34,6 +34,8 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
     $app->get('settings/{project}/{key}', 'SettingController@getSetting');
 
     $app->post('settings/{project}/{key}', 'SettingController@setSetting');
+
+    $app->delete('settings/{project}/{key}', 'SettingController@deleteSetting');
 });
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
