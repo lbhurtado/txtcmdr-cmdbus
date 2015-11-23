@@ -53,7 +53,6 @@ class SettingController extends ApiController
 
             $operation = $this->request->get('operation', 'replace');
             if (is_array($valueFromSettingFromCode)) {
-
                 switch (strtolower($operation)) {
                     case 'append':
                     case 'insert':
@@ -72,32 +71,31 @@ class SettingController extends ApiController
                         break;
                 }
             } else if (is_object($valueFromSettingFromCode)) {
-
                 $orig = json_decode(json_encode($valueFromSettingFromCode), true);
-
-//                $orig_dot = array_dot($orig);
-//                $json_dot = array_dot($json);
-//
-//                var_dump($orig_dot);
-//                var_dump($json_dot);
-//
-//                dd($this->array_merge_recursive_distinct($json, $orig));
-
                 switch (strtolower($operation)) {
                     case 'append':
                     case 'insert':
                     case 'add':
                         $json = $this->array_merge_recursive_distinct($orig, $json);
                         break;
+                    case 'delete':
+                    case 'cut':
+                    case 'remove':
+                        $json = $this->array_diff_recursive($valueFromSettingFromCode, $json);
+                        break;
+                    case 'empty':
+                    case 'clear':
+                    case 'unset':
+                        $json = [];
+                        break;
                 }
-
-
             }
             $descriptionFromSettingFromCode = $settingFromCode->description;
             $description = $this->request->get('description', $descriptionFromSettingFromCode);
         }
 
         $command = new PostSettingCommand($code, $json, $description);
+
         $this->commandBus->execute($command);
 
         return $this->getSetting($project, $key, $settingTransformer);
@@ -130,14 +128,14 @@ class SettingController extends ApiController
         return $merged;
     }
 
-    private function arrayRecursiveDiff($aArray1, $aArray2)
+    private function array_diff_recursive($aArray1, $aArray2)
     {
         $aReturn = array();
 
         foreach ($aArray1 as $mKey => $mValue) {
             if (array_key_exists($mKey, $aArray2)) {
                 if (is_array($mValue)) {
-                    $aRecursiveDiff = $this->arrayRecursiveDiff($mValue, $aArray2[$mKey]);
+                    $aRecursiveDiff = $this->array_diff_recursive($mValue, $aArray2[$mKey]);
                     if (count($aRecursiveDiff)) {
                         $aReturn[$mKey] = $aRecursiveDiff;
                     }
