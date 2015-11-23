@@ -9,11 +9,11 @@
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
         "parse/php-sdk": "1.1.*",
-        "telerivet/telerivet-php-client": "^1.1"
+        "telerivet/telerivet-php-client": "^1.1",
+        "fzaninotto/faker": "^1.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "fzaninotto/faker": "^1.5"
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
