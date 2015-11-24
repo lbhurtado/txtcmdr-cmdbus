@@ -37,13 +37,20 @@ class SettingController extends ApiController
         $json = $this->request->get('value');
         $description = $this->request->get('description');
 
-        array_walk_recursive($json, function (&$value) {
-            if (!is_array($value)) {
-                $value = str_replace(static::RANDOM_PASS_PHRASE_KEY, $this->getRandomPassPhrase(), $value);
-                if (in_array(strtolower($value), static::BOOLEAN_STRINGS))
-                    $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-            }
-        });
+        switch (gettype($json)) {
+            case 'array':
+                array_walk_recursive($json, function (&$value) {
+                    if (!is_array($value)) {
+                        $value = str_replace(static::RANDOM_PASS_PHRASE_KEY, $this->getRandomPassPhrase(), $value);
+                        if (in_array(strtolower($value), static::BOOLEAN_STRINGS))
+                            $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+                    }
+                });
+                break;
+            case 'string':
+                $json = str_replace(static::RANDOM_PASS_PHRASE_KEY, $this->getRandomPassPhrase(), $json);
+                break;
+        }
 
         $settingFromCode = Setting::where('code', $code)->first();
 
