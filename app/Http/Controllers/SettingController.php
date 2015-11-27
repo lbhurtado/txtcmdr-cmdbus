@@ -101,13 +101,13 @@ class SettingController extends ApiController
                     case 'append':
                     case 'insert':
                     case 'add':
-                        $json = ($valueFromSettingFromCode . "\n" . array($json));
+                        $json = ($valueFromSettingFromCode . "\n" . $json);
                         break;
                     case 'delete':
                     case 'cut':
                     case 'remove':
                         $arr = explode('\n',$valueFromSettingFromCode);
-                        $json = implode('\n', array_diff($arr, $json));
+                        $json = implode('\n', array_diff($arr, array($json)));
                         break;
                 }
             }
