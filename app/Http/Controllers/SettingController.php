@@ -96,6 +96,14 @@ class SettingController extends ApiController
                         $json = [];
                         break;
                 }
+            } else if (is_string($valueFromSettingFromCode)) {
+                switch (strtolower($operation)) {
+                    case 'append':
+                    case 'insert':
+                    case 'add':
+                        $json = ($valueFromSettingFromCode . "\n", $json);
+                        break;
+                }
             }
             $descriptionFromSettingFromCode = $settingFromCode->description;
             $description = $this->request->get('description', $descriptionFromSettingFromCode);
