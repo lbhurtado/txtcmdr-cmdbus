@@ -88,7 +88,7 @@ class SettingController extends ApiController
                     case 'delete':
                     case 'cut':
                     case 'remove':
-                        $json = $this->array_diff_recursive($valueFromSettingFromCode, $json);
+                        $json = $this->array_diff_recursive($valueFromSettingFromCode, array($json));
                         break;
                     case 'empty':
                     case 'clear':
