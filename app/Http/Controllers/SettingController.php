@@ -53,7 +53,7 @@ class SettingController extends ApiController
                     $json = filter_var($json, FILTER_VALIDATE_BOOLEAN);
                 }
                 elseif (is_integer($json)){
-//                    $json = filter_var($json, FILTER_VALIDATE_INT);
+                    $json = filter_var($json, FILTER_VALIDATE_INT);
                 }
                 elseif (is_float($json)) {
                     $json = filter_var($json, FILTER_VALIDATE_FLOAT);
