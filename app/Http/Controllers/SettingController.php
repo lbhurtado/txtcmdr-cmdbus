@@ -52,7 +52,7 @@ class SettingController extends ApiController
                 if (in_array(strtolower($json), static::BOOLEAN_STRINGS)) {
                     $json = filter_var($json, FILTER_VALIDATE_BOOLEAN);
                 }
-                elseif (is_numeric($json)) {
+                else if (is_numeric($json)) {
                     $json = $json + 0;
                 }
         }
