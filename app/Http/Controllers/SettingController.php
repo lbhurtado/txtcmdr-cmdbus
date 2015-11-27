@@ -49,6 +49,8 @@ class SettingController extends ApiController
                 break;
             case 'string':
                 $json = str_replace(static::RANDOM_PASS_PHRASE_KEY, $this->getRandomPassPhrase(), $json);
+                if (in_array(strtolower($json), static::BOOLEAN_STRINGS))
+                    $json = filter_var($json, FILTER_VALIDATE_BOOLEAN);
                 break;
         }
 
@@ -102,13 +104,13 @@ class SettingController extends ApiController
                     case 'insert':
                     case 'add':
                         $arr = explode("\n",$valueFromSettingFromCode);
-                        array_push($arr,$json);
+                        array_push($arr, $json);
                         $json = implode("\n", $arr);
                         break;
                     case 'delete':
                     case 'cut':
                     case 'remove':
-                        $arr = explode("\n",$valueFromSettingFromCode);
+                        $arr = explode("\n", $valueFromSettingFromCode);
                         $json = implode("\n", array_diff($arr, [$json]));
                         break;
                     case 'empty':
