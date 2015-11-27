@@ -54,6 +54,7 @@ class SettingController extends ApiController
                 }
                 else {
                     $json = filter_var($json, FILTER_VALIDATE_INT);
+                    $json = filter_var($json, FILTER_VALIDATE_FLOAT);
                 }
                 break;
         }
