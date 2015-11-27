@@ -101,7 +101,7 @@ class SettingController extends ApiController
                     case 'append':
                     case 'insert':
                     case 'add':
-                        $json = ($valueFromSettingFromCode . "\n", $json);
+                        $json = ($valueFromSettingFromCode . "\n" . $json);
                         break;
                 }
             }
