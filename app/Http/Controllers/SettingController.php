@@ -107,7 +107,13 @@ class SettingController extends ApiController
                     case 'cut':
                     case 'remove':
                         $arr = explode('\n',$valueFromSettingFromCode);
-                        $json = implode('\n', array_diff($arr, array($json)));
+
+                        $json = implode('\n', array_diff($arr, [$json]));
+                        break;
+                    case 'empty':
+                    case 'clear':
+                    case 'unset':
+                        $json = "";
                         break;
                 }
             }
