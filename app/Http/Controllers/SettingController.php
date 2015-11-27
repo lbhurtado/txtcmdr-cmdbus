@@ -49,8 +49,12 @@ class SettingController extends ApiController
                 break;
             case 'string':
                 $json = str_replace(static::RANDOM_PASS_PHRASE_KEY, $this->getRandomPassPhrase(), $json);
-                if (in_array(strtolower($json), static::BOOLEAN_STRINGS))
+                if (in_array(strtolower($json), static::BOOLEAN_STRINGS)) {
                     $json = filter_var($json, FILTER_VALIDATE_BOOLEAN);
+                }
+                else {
+                    $json = filter_var($json, FILTER_VALIDATE_INT);
+                }
                 break;
         }
 
