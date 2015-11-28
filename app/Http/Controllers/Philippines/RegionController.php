@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Philippines;
 
+use App\Classes\Commanding\ValidationCommandBus;
 use App\Classes\Philippines\Region;
 use App\Classes\Transformers\RegionTransformer;
 use App\Http\Controllers\ApiController;
@@ -17,9 +18,9 @@ class RegionController extends ApiController
 {
     protected $regionTransformer;
 
-    public function __construct(Request $request, RegionTransformer $regionTransformer)
+    public function __construct(ValidationCommandBus $commandBus, Request $request, RegionTransformer $regionTransformer)
     {
-        parent::__construct($request);
+        parent::__construct($commandBus, $request);
 
         $this->regionTransformer = $regionTransformer;
 
