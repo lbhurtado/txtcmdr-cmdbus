@@ -21,7 +21,16 @@ class DatabaseSeeder extends Seeder
         $this->call('TownsTableSeeder');
         $this->call('UsersTableSeeder');
         $this->call('SettingsTableSeeder');
+        $this->call('ProjectsTableSeeder');
+        $this->call('GroupsTableSeeder');
+        $this->call('StatusesTableSeeder');
+        $this->call('ObjectivesTableSeeder');
+        $this->call('TasksTableSeeder');
+        $this->call('AssignmentsTableSeeder');
 
         Model::reguard();
     }
 }
+
+//composer dump-autoload
+//php artisan migrate:refresh --seed

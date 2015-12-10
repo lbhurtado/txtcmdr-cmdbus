@@ -50,7 +50,7 @@ class TextCommanderController extends Controller
         $this->commandBus->execute($command);
     }
 
-    public function users() {
+    public function cloudUsers() {
         $query = ParseUser::query();
         $results = $query->find(true);
         echo "Successfully retrieved " . count($results) . " users.\n";

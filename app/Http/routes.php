@@ -29,13 +29,15 @@ $app->group(['prefix' => 'txtcmdr', 'namespace' => 'App\Http\Controllers'], func
 
     $app->post('read/{origin:\d+}/{destination:\d+}/{passage}', 'TextCommanderController@read');
 
-    $app->get('users', 'TextCommanderController@users');
+    $app->get('parse/users', 'TextCommanderController@cloudUsers');
 
     $app->get('settings/{project}/{key}', 'SettingController@getSetting');
 
     $app->post('settings/{project}/{key}', 'SettingController@setSetting');
 
     $app->delete('settings/{project}/{key}', 'SettingController@deleteSetting');
+
+    $app->get('users', 'UserController@getUsers');
 });
 
 $app->group(['prefix' => 'ph', 'namespace' => 'App\Http\Controllers'], function ($app) {
