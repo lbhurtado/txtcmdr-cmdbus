@@ -40,7 +40,6 @@ class AssignmentsTableSeeder extends Seeder
             ]);
 
         }
-//        var_dump($errands);
 
         // Uncomment the below to run the seeder
         DB::table('assignments')->insert($errands);

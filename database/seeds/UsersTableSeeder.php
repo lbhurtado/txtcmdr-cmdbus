@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'email'    => 'lester@applester.co',
             'mobile'   => '639189362340',
             'password' => Hash::make('apple1'),
+            'status'   => 'active',
         ));
     }
 }

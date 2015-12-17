@@ -23,10 +23,15 @@ class DatabaseSeeder extends Seeder
         $this->call('SettingsTableSeeder');
         $this->call('ProjectsTableSeeder');
         $this->call('GroupsTableSeeder');
+        $this->call('SubscriptionsTableSeeder');
+        $this->call('ConferencesTableSeeder');
+        $this->call('AddressesTableSeeder');
         $this->call('StatusesTableSeeder');
         $this->call('ObjectivesTableSeeder');
+        $this->call('TranscriptsTableSeeder');
         $this->call('TasksTableSeeder');
         $this->call('AssignmentsTableSeeder');
+        $this->call('ContributionsTableSeeder');
 
         Model::reguard();
     }

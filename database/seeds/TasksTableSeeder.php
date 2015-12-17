@@ -41,34 +41,60 @@ class TasksTableSeeder extends Seeder
         );
 
         $tasks = array(
+            [
+                'objective_id'      => $objective_id['txtcmdr recruit'],
+                'quota'             => 100,
+                'sequence'          => 1,
+                'transcript_code'   => "recruit",
+                'regex'             => "^recruit (0|63)([1-9]{3})([0-9]{7})$"
+            ],
+            [
+                'objective_id'      => $objective_id['txtcmdr recruit'],
+                'quota'             => 100,
+                'sequence'          => 2,
+                'transcript_code'   => "confirm",
+                'regex'             => "^confirm ([0-9]{4}|[0-9]{6}) ([ -~]+) ([0-9]{2})$"
+            ],
 //            ['objective_id' => $objective_id['txtcmdr recruit'],     'sequence' => 1, 'name' => "recruit 1st 100"],
 //            ['objective_id' => $objective_id['txtcmdr recruit'],     'sequence' => 2, 'name' => "recruit 2nd 100"],
 //            ['objective_id' => $objective_id['txtcmdr recruit'],     'sequence' => 3, 'name' => "recruit 3rd 100"],
 //            ['objective_id' => $objective_id['txtcmdr recruit'],     'sequence' => 4, 'name' => "recruit 4th 100"],
 //            ['objective_id' => $objective_id['txtcmdr recruit'],     'sequence' => 5, 'name' => "recruit 5th 100"],
             [
-                'objective_id'  => $objective_id['txtcmdr poll watch'],
-                'sequence'      => 1,
-                'name'          => "registration",
-                'instructions'  => "Go to your precinct. Send 'HERE' when you get there.",
-                'regex'         => "here"
+                'objective_id'      => $objective_id['txtcmdr poll watch'],
+                'quota'             => 1,
+                'sequence'          => 1,
+                'transcript_code'   => "registration",
+                'regex'             => "^(here|dito)$"
             ],
             [
-                'objective_id'  => $objective_id['txtcmdr poll watch'],
-                'sequence'      => 1,
-                'name'          => "initialization",
-                'instructions'  => "Observe the initialization of the PCOS machine . Send 'ZERO' when you see all the zeroes in the receipt.",
-                'regex'         => "zero"
+                'objective_id'      => $objective_id['txtcmdr poll watch'],
+                'quota'             => 1,
+                'sequence'          => 2,
+                'transcript_code'   => "initialization",
+                'regex'             => "^zero$"
             ],
             [
-                'objective_id'  => $objective_id['txtcmdr poll watch'],
-                'sequence'      => 1,
-                'name'          => "finalization",
-                'instructions'  => "Observe the finalization of the PCOS machine . Send 'final' when you see the receipt.",
-                'regex'         => "final"
+                'objective_id'      => $objective_id['txtcmdr poll watch'],
+                'quota'             => 1,
+                'sequence'          => 3,
+                'transcript_code'   => "finalization",
+                'regex'             => "^final$"
             ],
-//            ['objective_id' => $objective_id['txtcmdr poll watch'],  'sequence' => 4, 'name' => "printing"],
-//            ['objective_id' => $objective_id['txtcmdr poll watch'],  'sequence' => 5, 'name' => "transmission"],
+            [
+                'objective_id'      => $objective_id['txtcmdr poll watch'],
+                'quota'             => 1,
+                'sequence'          => 3,
+                'transcript_code'   => "printing",
+                'regex'             => "^print$"
+            ],
+            [
+                'objective_id'      => $objective_id['txtcmdr poll watch'],
+                'quota'             => 1,
+                'sequence'          => 3,
+                'transcript_code'   => "transmission",
+                'regex'             => "^transmit$"
+            ],
 //            ['objective_id' => $objective_id['txtcmdr quick count'], 'sequence' => 1, 'name' => "poll presidents"],
 //            ['objective_id' => $objective_id['txtcmdr quick count'], 'sequence' => 2, 'name' => "poll vice-presidents"],
 //            ['objective_id' => $objective_id['txtcmdr quick count'], 'sequence' => 3, 'name' => "poll senators"],

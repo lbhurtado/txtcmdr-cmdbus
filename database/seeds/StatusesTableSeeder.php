@@ -18,7 +18,7 @@ class StatusesTableSeeder extends Seeder
     public function run()
     {
         // Uncomment the below to wipe the table clean before populating
-        DB::table('groups')->delete();
+        DB::table('statuses')->delete();
 
         $user_id = array(
             'lbhurtado' => DB::table('users')->where('name', '=', 'lbhurtado')->pluck('id'),
@@ -29,10 +29,17 @@ class StatusesTableSeeder extends Seeder
         );
 
         $statuses = array(
-            ['project_id' => $project_id['txtcmdr'], 'user_id' => $user_id['lbhurtado'], 'name' => "initial"],
+            ['project_id' => $project_id['txtcmdr'], 'user_id' => $user_id['lbhurtado'], 'status' => "initial"],
+            ['project_id' => $project_id['txtcmdr'], 'user_id' => $user_id['lbhurtado'], 'status' => "2nd time"],
         );
 
         // Uncomment the below to run the seeder
         DB::table('statuses')->insert($statuses);
+
+//        DB::table('statuses')
+//            ->where('project_id','=',$project_id['txtcmdr'])
+//            ->where('user_id','=',$user_id['lbhurtado'])
+//            ->update(['status'=>"2nd time"]);
+
     }
 }
